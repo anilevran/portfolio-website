@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { login } from "../features/auth";
 import { Link } from "react-router-dom";
+import { login } from "../actions";
 
-import "../css/Login.css";
+import "../css/Auth.css";
 
 function Register() {
   var [email, setEmail] = useState("");
@@ -23,8 +23,8 @@ function Register() {
         })
         .then((response) => {
           if (response.status === 200) {
-            dispatch(login());
             console.log("Kullanıcı Başarıyla Eklendi.");
+            dispatch(login());
             window.location.pathname = "/";
           } else {
             console.log("Kullanıcı Eklenemedi!");
@@ -44,36 +44,39 @@ function Register() {
   };
   return (
     <form className="Form-container">
-      <div className="Form-line">
-        <div className="Form-label">Email:</div>
-        <input
-          className="Form-input"
-          placeholder="example@gmail.com"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </div>
-      <div className="Form-line">
-        <div className="Form-label">Şifre</div>
-        <input
-          className="Form-input"
-          type="password"
-          placeholder="************"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-      </div>
-      <div className="Form-line-button">
-        <Link
-          to="/"
-          className="Form-button"
-          type="button"
-          onClick={handleSignup}
-        >
-          Kayıt Ol
-        </Link>
+      {/* <div className="Form-info">Giriş Yap!</div> */}
+      <div className="Form-content-container">
+        <div className="Form-line">
+          <div className="Form-label">Email</div>
+          <input
+            className="Form-input"
+            placeholder="example@gmail.com"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <div className="Form-line">
+          <div className="Form-label">Şifre</div>
+          <input
+            className="Form-input"
+            type="password"
+            placeholder="************"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </div>
+        <div className="Form-line-button">
+          <Link
+            to="/"
+            className="Form-button"
+            type="button"
+            onClick={handleSignup}
+          >
+            Kayıt Ol
+          </Link>
+        </div>
       </div>
     </form>
   );

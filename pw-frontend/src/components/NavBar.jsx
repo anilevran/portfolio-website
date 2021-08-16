@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../features/auth";
 import { Link } from "react-router-dom";
-
+import { logout } from "../actions";
 import "../css/Navbar.css";
 
 function NavBar() {
   let param = window.location.pathname;
   var [activeTab, setActiveTab] = useState(param);
-  var isAuthed = useSelector((state) => {
-    return state.value;
-  });
-  var dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   return (
     <nav className="nav-container">
       <div className="nav-list">
@@ -44,7 +41,7 @@ function NavBar() {
           İletişim
         </Link>
       </div>
-      {isAuthed === null || isAuthed === false ? (
+      {!auth ? (
         <div className="nav-auth">
           <Link
             to="/signin"

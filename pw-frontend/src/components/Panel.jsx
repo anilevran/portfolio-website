@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
-import "../css/AdminPanel.css";
+import "../css/Panel.css";
 
 function Panel() {
-  var isAuthed = useSelector((state) => {
-    return state.value;
-  });
-
   //Add product to database
   // , {
   //   name: "tshirt",
@@ -20,7 +16,7 @@ function Panel() {
   // }
 
   var postTransactions = async () => {
-    if (isAuthed === true) {
+    if (auth) {
       await axios
         .get("http://localhost:9000/adminpanel")
         .then((result) => {
@@ -32,6 +28,8 @@ function Panel() {
         });
     }
   };
+
+  var editRow = (id) => {};
 
   var datafunc = () => {
     if (isPosted === true) {
@@ -45,11 +43,16 @@ function Panel() {
               <div className="Data-column">{apiResponse[i].type}</div>
               <div className="Data-column">{apiResponse[i].size}</div>
               <div className="Data-column">{apiResponse[i].price + "TL"}</div>
-              <div className="Data-column"><span className="Edit-icon"><FontAwesomeIcon icon={faEdit} /></span></div>
+              <div className="Data-column">
+                <span
+                  className="Edit-icon"
+                  onClick={() => editRow(apiResponse[i]._id)}
+                >
+                  <FontAwesomeIcon icon={faEdit} />
+                </span>
+              </div>
             </div>
-            
           </>
-
         );
       }
       return arr;
@@ -58,6 +61,7 @@ function Panel() {
 
   var [apiResponse, setapiResponse] = useState("Empty");
   var [isPosted, setPosted] = useState(false);
+  var auth = useSelector((state) => state.auth);
   if (!isPosted) {
     postTransactions();
     setPosted(true);
@@ -65,16 +69,18 @@ function Panel() {
 
   return (
     <div>
-      {isAuthed === true ? (
-        <div className="Data-Container">
-          <div className="Data-header">
-            <div className="Data-column">Ürün İsmi</div>
-            <div className="Data-column">Ürün Tipi</div>
-            <div className="Data-column">Ürün Boyutu</div>
-            <div className="Data-column">Ürün Fiyatı</div>
-            <div className="Data-column">Düzenle</div>
+      {auth ? (
+        <div className="Container-Panel">
+          <div className="Data-Container">
+            <div className="Data-header">
+              <div className="Data-column">Ürün İsmi</div>
+              <div className="Data-column">Ürün Tipi</div>
+              <div className="Data-column">Ürün Boyutu</div>
+              <div className="Data-column">Ürün Fiyatı</div>
+              <div className="Data-column">Düzenle</div>
+            </div>
+            {datafunc()}
           </div>
-          {datafunc()}
         </div>
       ) : (
         <div>YETKI YOK</div>

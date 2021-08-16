@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { login } from "../features/auth";
 import { Link } from "react-router-dom";
+import { login } from "../actions";
 
-import "../css/Login.css";
+import "../css/Auth.css";
 
 function Login() {
   var [email, setEmail] = useState("anil.evran7@gmail.com");
   var [password, setPassword] = useState("10261026");
-  var dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   var handleLogin = (e) => {
-    debugger;
     axios
       .post("http://localhost:9000/signin", {
         email: email,
@@ -22,8 +21,8 @@ function Login() {
         if (result.data.length === 0) {
           console.log("Bu Kullanıcı Kayıtlı Değil!");
         } else {
-          dispatch(login());
           console.log(`${result.data[0].email} başarıyla giriş yaptı`);
+          dispatch(login());
         }
       })
       .catch((err) => {
@@ -31,7 +30,7 @@ function Login() {
         console.log("Giriş yaparken hata oluştu");
       });
   };
-  
+
   var handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -40,35 +39,38 @@ function Login() {
   };
   return (
     <form className="Form-container">
-      <div className="Form-line">
-        <div className="Form-label">Email:</div>
-        <input
-          className="Form-input"
-          placeholder="example@gmail.com"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </div>
-      <div className="Form-line">
-        <div className="Form-label">Şifre</div>
-        <input
-          className="Form-input"
-          type="password"
-          placeholder="************"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <div className="Form-line-button">
-        <Link
-          to="/"
-          className="Form-button"
-          type="button"
-          onClick={handleLogin}
-        >
-          Giriş Yap
-        </Link>
+      {/* <div className="Form-info">Giriş Yap!</div> */}
+      <div className="Form-content-container">
+        <div className="Form-line">
+          <div className="Form-label">Email</div>
+          <input
+            className="Form-input"
+            placeholder="example@gmail.com"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <div className="Form-line">
+          <div className="Form-label">Şifre</div>
+          <input
+            className="Form-input"
+            type="password"
+            placeholder="************"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <div className="Form-line-button">
+          <Link
+            to="/"
+            className="Form-button"
+            type="button"
+            onClick={handleLogin}
+          >
+            Giriş Yap
+          </Link>
+        </div>
       </div>
     </form>
   );

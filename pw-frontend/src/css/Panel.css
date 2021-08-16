@@ -1,7 +1,14 @@
+.Container-Panel {
+  width: 100%;
+  min-height: 900px;
+  background-color: rgba(255, 167, 129, 1);
+  padding-top: 50px;
+}
+
 .Data-Container {
   width: 80%;
-  margin: 50px auto;
   min-height: 300px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background-color: rgba(91, 14, 45, 0.6);
@@ -39,7 +46,7 @@
   outline: none;
   text-decoration: none;
 }
-.Data-column .Edit-icon{
+.Data-column .Edit-icon {
   cursor: pointer;
   font-size: 25px;
 }
