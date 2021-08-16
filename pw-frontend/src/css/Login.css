@@ -1,0 +1,66 @@
+.Form-container {
+  margin: 100px auto 0;
+  width: 70%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  padding: 50px 0;
+  flex-direction: column;
+}
+/* rgb(192, 192, 192); */
+
+.Form-line {
+  width: 70%;
+  height: 10%;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.Form-label {
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 20px;
+  margin: 0 20px;
+  padding: 0 20px;
+  cursor: default;
+}
+.Form-input {
+  width: 50%;
+  height: 100%;
+  font-size: 20px;
+  border-radius: 20px;
+  margin: 0 20px;
+  padding: 0 20px;
+  border: none;
+  outline: none;
+}
+
+.Form-line-button {
+  width: 50%;
+  height: 10%;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.Form-button {
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 20px;
+  margin: 0 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}

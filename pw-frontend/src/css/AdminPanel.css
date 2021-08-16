@@ -1,0 +1,29 @@
+.Data-Container {
+  width: 80%;
+  margin: 50px auto;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(91, 14, 45, 0.6);
+}
+.Data-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10%;
+}
+.Data-header {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(91, 14, 45, 1);
+  color: white;
+}
+.Data-column {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

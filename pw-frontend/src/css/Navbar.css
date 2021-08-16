@@ -1,0 +1,73 @@
+.nav-container {
+  width: 100%;
+  height: 60px;
+  background-color: rgba(91, 14, 45, 0.6);
+  display: flex;
+  justify-content: space-between;
+}
+.nav-list {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.nav-list .nav-link {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  color: white;
+}
+
+.nav-list .nav-link:hover,
+.nav-auth .nav-link:hover {
+  background-color: rgba(91, 14, 45, 1);
+  transition: all 0.2s;
+}
+
+.nav-list .nav-link-active {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  color: white;
+  background-color: rgba(91, 14, 45, 1);
+}
+.nav-auth {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.nav-auth .nav-link {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  color: white;
+}
+
+.nav-auth .nav-link-active {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  color: white;
+  background-color: rgba(91, 14, 45, 1);
+}
