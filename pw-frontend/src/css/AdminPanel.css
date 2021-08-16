@@ -1,7 +1,7 @@
 .Data-Container {
   width: 80%;
   margin: 50px auto;
-  height: 500px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   background-color: rgba(91, 14, 45, 0.6);
@@ -10,20 +10,36 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 10%;
+  height: 30px;
+  border-bottom: 2px solid rgba(91, 14, 45, 0.6);
+  margin: 5px 0;
+  padding: 5px 0;
 }
 .Data-header {
   width: 100%;
-  height: 10%;
+  height: 30px;
   display: flex;
   flex-direction: row;
   background-color: rgba(91, 14, 45, 1);
   color: white;
 }
+.Data-header .Data-column {
+  font-weight: 700;
+  font-size: 20px;
+}
+
 .Data-column {
-  width: 25%;
+  width: 20%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-weight: 500;
+  outline: none;
+  text-decoration: none;
+}
+.Data-column .Edit-icon{
+  cursor: pointer;
+  font-size: 25px;
 }

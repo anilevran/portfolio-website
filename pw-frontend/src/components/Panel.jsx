@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 import "../css/AdminPanel.css";
 
@@ -32,19 +34,24 @@ function Panel() {
   };
 
   var datafunc = () => {
-    if (isPosted == true) {
+    if (isPosted === true) {
       let arr = [];
       for (let i = 0; i < apiResponse.length; i++) {
+        //contentEditable="true"
         arr.push(
-          <div className="Data-row">
-            <div className="Data-column">{apiResponse[i].name}</div>
-            <div className="Data-column">{apiResponse[i].type}</div>
-            <div className="Data-column">{apiResponse[i].size}</div>
-            <div className="Data-column">{apiResponse[i].price + "TL"}</div>
-          </div>
+          <>
+            <div className="Data-row" itemID={apiResponse[i]._id}>
+              <div className="Data-column">{apiResponse[i].name}</div>
+              <div className="Data-column">{apiResponse[i].type}</div>
+              <div className="Data-column">{apiResponse[i].size}</div>
+              <div className="Data-column">{apiResponse[i].price + "TL"}</div>
+              <div className="Data-column"><span className="Edit-icon"><FontAwesomeIcon icon={faEdit} /></span></div>
+            </div>
+            
+          </>
+
         );
       }
-      console.log(arr);
       return arr;
     }
   };
@@ -65,6 +72,7 @@ function Panel() {
             <div className="Data-column">Ürün Tipi</div>
             <div className="Data-column">Ürün Boyutu</div>
             <div className="Data-column">Ürün Fiyatı</div>
+            <div className="Data-column">Düzenle</div>
           </div>
           {datafunc()}
         </div>

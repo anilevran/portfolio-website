@@ -4,6 +4,7 @@ const Product = require("../models/product.js");
 
 function AdminPanel(req, res) {
   Product.find().then((result) => {
+    console.log(result)
     res.send(result);
   });
 

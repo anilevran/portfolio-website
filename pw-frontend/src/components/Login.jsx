@@ -12,7 +12,7 @@ function Login() {
   var dispatch = useDispatch();
 
   var handleLogin = (e) => {
-    e.preventDefault();
+    debugger;
     axios
       .post("http://localhost:9000/signin", {
         email: email,
@@ -24,7 +24,6 @@ function Login() {
         } else {
           dispatch(login());
           console.log(`${result.data[0].email} başarıyla giriş yaptı`);
-          window.location.pathname = "/";
         }
       })
       .catch((err) => {
@@ -32,6 +31,7 @@ function Login() {
         console.log("Giriş yaparken hata oluştu");
       });
   };
+  
   var handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
