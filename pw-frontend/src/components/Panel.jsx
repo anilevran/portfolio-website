@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +29,22 @@ function Panel() {
     }
   };
 
-  var editRow = (id) => {};
+  var editRow = (tempId) => {
+    let row = document.getElementById(tempId);
+    let rowChilds = document.getElementById(tempId).children;
+
+    if (rowChilds[0].getAttribute("contenteditable") === "true") {
+      row.style.backgroundColor = "rgba(91, 14, 45, 0)";
+      for (let i = 0; i < rowChilds.length; i++) {
+        rowChilds[i].setAttribute("contenteditable", "false");
+      }
+    } else {
+      for (let i = 0; i < rowChilds.length; i++) {
+        rowChilds[i].setAttribute("contenteditable", "true");
+        row.style.backgroundColor = "rgba(91, 14, 45, 1)";
+      }
+    }
+  };
 
   var datafunc = () => {
     if (isPosted === true) {
@@ -38,8 +53,10 @@ function Panel() {
         //contentEditable="true"
         arr.push(
           <>
-            <div className="Data-row" itemID={apiResponse[i]._id}>
-              <div className="Data-column">{apiResponse[i].name}</div>
+            <div className="Data-row" id={apiResponse[i]._id}>
+              <div className="Data-column" onChange={() => console.log("asd")}>
+                {apiResponse[i].name}
+              </div>
               <div className="Data-column">{apiResponse[i].type}</div>
               <div className="Data-column">{apiResponse[i].size}</div>
               <div className="Data-column">{apiResponse[i].price + "TL"}</div>
@@ -61,11 +78,14 @@ function Panel() {
 
   var [apiResponse, setapiResponse] = useState("Empty");
   var [isPosted, setPosted] = useState(false);
+
   var auth = useSelector((state) => state.auth);
   if (!isPosted) {
     postTransactions();
     setPosted(true);
   }
+
+  useEffect(() => {});
 
   return (
     <div>
