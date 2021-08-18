@@ -13,7 +13,7 @@ function Login() {
 
   var handleLogin = (e) => {
     axios
-      .post("http://localhost:9000/signin", {
+      .post("http://localhost:9000/auth/signin", {
         email: email,
         password: password,
       })

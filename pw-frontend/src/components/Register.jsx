@@ -11,30 +11,28 @@ function Register() {
   var [password, setPassword] = useState("");
   var dispatch = useDispatch();
 
-  var isFieldsValid = () => {};
+  //var isFieldsValid = () => {};
 
   var handleSignup = (e) => {
     e.preventDefault();
-    if (isFieldsValid) {
-      axios
-        .post("http://localhost:9000/signup", {
-          email: email,
-          password: password,
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            console.log("Kullanıcı Başarıyla Eklendi.");
-            dispatch(login());
-            window.location.pathname = "/";
-          } else {
-            console.log("Kullanıcı Eklenemedi!");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log("Kayıt Olurken Hata Oluştu.");
-        });
-    }
+    axios
+      .post("http://localhost:9000/auth/signup", {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("Kullanıcı Başarıyla Eklendi.");
+          dispatch(login());
+          window.location.pathname = "/";
+        } else {
+          console.log("Kullanıcı Eklenemedi!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("Kayıt Olurken Hata Oluştu.");
+      });
   };
   var handleEmailChange = (e) => {
     setEmail(e.target.value);

@@ -2,8 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config({ path: __dirname + "\\.env" });
-const signupRouter = require("./routes/Signup");
-const signinRouter = require("./routes/Signin");
+const authRouter = require("./routes/auth");
 const adminpanelRouter = require("./routes/Adminpanel");
 const PORT = process.env.PORT || 9001;
 const mongoUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.skw3y.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
@@ -30,8 +29,7 @@ app.get("/", (req, res) => {
   res.send("API WORKING PROPERLY");
 });
 
-app.use("/signup", signupRouter);
-app.use("/signin", signinRouter);
+app.use("/auth", authRouter);
 app.use("/adminpanel", adminpanelRouter);
 
 app.listen(PORT, () => {
