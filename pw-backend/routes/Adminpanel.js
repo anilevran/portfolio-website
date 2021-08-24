@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/product.js");
+const verify = require("./verifyToken");
 
 function AdminPanel(req, res) {
+  res.send(req.user);
   //Get products
-  Product.find().then((result) => {
-    res.send(result);
-  });
+  // Product.find().then((result) => {
+  //   res.send(result);
+  // });
 
   //Save products
   // var product = new Product({
@@ -25,6 +27,7 @@ function AdminPanel(req, res) {
   //     console.log(err);
   //   });
 }
-router.get("/", AdminPanel);
+console.log("sadgasdgadg");
+router.get("/", verify, AdminPanel);
 // router.post("/", AdminPanel);
 module.exports = router;
