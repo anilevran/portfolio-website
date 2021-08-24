@@ -1,21 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
-const { registerValidation, loginValidation } = require("../validation");
+const { registerValidation, loginValidation, isEmailExist } = require("../validation");
+const bcrypt = require("bcryptjs")
 
 const signIn = async (req, res) => {
+  
+  //Is Form Valid
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  
 
-  const { emailExist } = async () => {
-    await User.find({ email: req.body.email }).then((result) => {
-      if (result.length == 0) {
-        return res.status(400).send("Email or password wrong");
-      }
-    });
-  };
+  //Is Email Exist In Database
+  const userTemp = await User.findOne({email: req.body.email})
+  if(!userTemp) return res.status(400).send("Email Doesn't Exist!!");
+  
+  //Compare Passwords
+  const validPass = await bcrypt.compare(req.body.password,userTemp.password)
+  console.log(validPass)
+  if(!validPass) return res.status(400).send("Invalid password!!");
 
-  search_params = { email: req.body.email, password: req.body.password };
+  //Find User in database
+  search_params = { email: req.body.email, password: userTemp.password };
   User.find(search_params).then((result) => {
     console.log(`${result[0].email} bulundu`);
     res.send(result);
@@ -23,19 +29,22 @@ const signIn = async (req, res) => {
 };
 
 const signUp = async (req, res) => {
+  //Is Form Valid
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  
+  //Is Email Exist In Database
+  const emailExist  = await User.findOne({email: req.body.email})
+  if(emailExist) return res.status(400).send("Email Already Exist!!");
 
-  const { emailExist } = await User.find({ email: req.body.email }).then(
-    (result) => {
-      if (result.length == 1) {
-        return res.status(400).send("Email or password wrong");
-      }
-    }
-  );
+  //Hashed Password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password,salt);
+
+  //Save User to Database
   var user = new User({
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
   });
 
   user

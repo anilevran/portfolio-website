@@ -12,6 +12,7 @@ function Login() {
   const dispatch = useDispatch();
 
   var handleLogin = (e) => {
+    debugger;
     axios
       .post("http://localhost:9000/auth/signin", {
         email: email,

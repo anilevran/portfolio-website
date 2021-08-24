@@ -3,10 +3,12 @@ const router = express.Router();
 const Product = require("../models/product.js");
 
 function AdminPanel(req, res) {
+  //Get products
   Product.find().then((result) => {
     res.send(result);
   });
 
+  //Save products
   // var product = new Product({
   //   name: req.body.name,
   //   type: req.body.type,

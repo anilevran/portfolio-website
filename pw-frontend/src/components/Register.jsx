@@ -14,7 +14,6 @@ function Register() {
   //var isFieldsValid = () => {};
 
   var handleSignup = (e) => {
-    e.preventDefault();
     axios
       .post("http://localhost:9000/auth/signup", {
         email: email,
@@ -24,7 +23,6 @@ function Register() {
         if (response.status === 200) {
           console.log("Kullanıcı Başarıyla Eklendi.");
           dispatch(login());
-          window.location.pathname = "/";
         } else {
           console.log("Kullanıcı Eklenemedi!");
         }
